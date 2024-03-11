@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  # intercom-app:
+  #   build:
+  #     context: ../
+  #     dockerfile: Dockerfile
+  #   container_name: intercom-app
+  #   restart: always
+  #   ports:
+  #     - '3000:3000'
+  #   depends_on:
+  #     - intercom-postgres
+  #   env_file:
+  #     - .env
+
+  intercom-postgres:
+    image: postgres:14
+    container_name: intercom-postgres
+    restart: always
+    ports:
+      - '5432:5432'
+    env_file:
+      - .env
+    volumes:
+      - intercom-postgres:/var/lib/postgresql/data
+
+volumes:
+  intercom-postgres:
+    name: intercom-postgres-db
