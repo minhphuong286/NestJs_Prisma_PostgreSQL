@@ -10,7 +10,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = ""
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -18,5 +18,5 @@ model User {
   email String  @unique
   name  String?
   phone String @unique
-  isDeleted Boolean @default(false)
+  isDeleted Boolean @default(false) 
 }

@@ -9,6 +9,15 @@ export enum Environment {
 }
 
 export function getEnvironmentPath(dest: string): string {
+  const filePath: string = resolve(`${dest}/.env`);
+  if (!existsSync(filePath)) {
+    console.log("Not found dest file: ", `${dest}/.env`);
+  }
+  return filePath;
+}
+
+//In future
+export function getEnvironmentPathV2(dest: string): string {
   const env: string | undefined = process.env.APP_ENV;
   const fallback: string = resolve(`${dest}/.env`);
   const filename: string = env ? `${env}.env` : 'development.env';
