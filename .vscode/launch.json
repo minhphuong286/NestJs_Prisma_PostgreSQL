@@ -1,0 +1,18 @@
+{
+    "configurations": [
+        {
+            "type": "node-terminal",
+            "name": "Run Script: start:dev",
+            "request": "launch",
+            "command": "nvm use 20 && npm run start:dev",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "node-terminal",
+            "name": "Run Script: start:debug",
+            "request": "launch",
+            "command": "nvm use 20 && npm run start:debug",
+            "cwd": "${workspaceFolder}"
+        },
+    ]
+}
