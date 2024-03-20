@@ -88,6 +88,15 @@ export class AuthService {
     }
 
     async refresh(refreshDto: RefreshDto) {
+        try{
+            this.jwt.verify(refreshDto.refreshToken, { secret: this.jwtConfigService.secretRefresh });
+        }catch(e){
+            if ((e as Error).name === 'TokenExpiredError') {
+                throw new UnauthorizedException('Token expired');
+            }
+            throw new UnauthorizedException();
+        }
+
         const payload = this.jwt.decode(refreshDto.refreshToken);
         const id = hashIds.decode(payload.sub)[0] as number;
         const token = await this.postgresqlPrismaService.token.findUnique({
@@ -106,7 +115,7 @@ export class AuthService {
 
     async logout(data: any) {
         // Neet to update with device indentify that user logging in.
-        return await this.postgresqlPrismaService.token.deleteMany({ where: { userId: +data.userId} });
+        return await this.postgresqlPrismaService.token.deleteMany({ where: { userId: +data.userId } });
     }
 
 }
