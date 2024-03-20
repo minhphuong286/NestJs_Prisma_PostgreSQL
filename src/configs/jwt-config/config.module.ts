@@ -15,7 +15,10 @@ const envFilePath: string = getEnvironmentPath(ENVIRONMENT_PATH);
       envFilePath,
       load: [configuration],
       validationSchema: Joi.object({
-        JWT_SECRET: Joi.string(),
+        JWT_SECRET_ACCESS: Joi.string(),
+        JWT_EXPIRE_TIME_ACCESS: Joi.string(),
+        JWT_SECRET_REFRESH: Joi.string(),
+        JWT_EXPIRE_TIME_REFRESH: Joi.string(),
       }),
     }),
   ],
