@@ -2,9 +2,10 @@ import * as Joi from 'joi';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import configuration from './configuration';
-import { DBConfigService } from './config.service';
+
 import { getEnvironmentPath } from 'src/common/helpers/environment.helper';
 import { ENVIRONMENT_PATH } from 'src/common/constants/constants';
+import { JwtConfigService } from './config.service';
 
 const envFilePath: string = getEnvironmentPath(ENVIRONMENT_PATH);
 
@@ -14,15 +15,14 @@ const envFilePath: string = getEnvironmentPath(ENVIRONMENT_PATH);
       envFilePath,
       load: [configuration],
       validationSchema: Joi.object({
-        DB_NAME: Joi.string(),
-        DB_HOST: Joi.string(),
-        DB_PORT: Joi.number().default(1433),
-        DB_USER: Joi.string(),
-        DB_PASSWORD: Joi.string(),
+        JWT_SECRET_ACCESS: Joi.string(),
+        JWT_EXPIRE_TIME_ACCESS: Joi.string(),
+        JWT_SECRET_REFRESH: Joi.string(),
+        JWT_EXPIRE_TIME_REFRESH: Joi.string(),
       }),
     }),
   ],
-  providers: [DBConfigService],
-  exports: [DBConfigService],
+  providers: [JwtConfigService],
+  exports: [JwtConfigService],
 })
-export class DBConfigModule {}
+export class JwtConfigModule {}

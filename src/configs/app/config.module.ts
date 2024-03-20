@@ -1,6 +1,6 @@
 import * as Joi from 'joi';
 import { Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigModule } from '@nestjs/config';
 import configuration from './configuration';
 import { AppConfigService } from './config.service';
 import { getEnvironmentPath } from 'src/common/helpers/environment.helper';
@@ -23,7 +23,7 @@ const envFilePath: string = getEnvironmentPath(ENVIRONMENT_PATH);
       }),
     }),
   ],
-  providers: [ConfigService, AppConfigService],
-  exports: [ConfigService, AppConfigService],
+  providers: [AppConfigService],
+  exports: [AppConfigService],
 })
 export class AppConfigModule {}
